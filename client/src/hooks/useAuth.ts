@@ -8,8 +8,38 @@ export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [testMode, setTestMode] = useState(false);
 
   useEffect(() => {
+    // Check for test mode
+    const isTestMode = localStorage.getItem('testMode') === 'true';
+    setTestMode(isTestMode);
+    
+    if (isTestMode) {
+      // Mock user for test mode
+      const mockUser = {
+        uid: 'test-user-123',
+        email: 'test@example.com',
+        displayName: 'Test User',
+        photoURL: null,
+      } as User;
+      
+      const mockAppUser = {
+        id: 1,
+        email: 'test@example.com',
+        firebaseUid: 'test-user-123',
+        username: 'Test User',
+        currentStreak: 5,
+        totalWorkouts: 12,
+        createdAt: new Date(),
+      } as AppUser;
+      
+      setUser(mockUser);
+      setAppUser(mockAppUser);
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChange(async (firebaseUser) => {
       setUser(firebaseUser);
       
@@ -59,6 +89,11 @@ export function useAuth() {
 
   const logout = async () => {
     try {
+      if (testMode) {
+        localStorage.removeItem('testMode');
+        window.location.reload();
+        return;
+      }
       await signOutUser();
     } catch (error) {
       console.error("Logout error:", error);
@@ -73,5 +108,6 @@ export function useAuth() {
     login,
     logout,
     isAuthenticated: !!user,
+    testMode,
   };
 }

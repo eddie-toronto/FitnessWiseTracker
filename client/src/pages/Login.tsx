@@ -6,6 +6,12 @@ import { useAuth } from "@/hooks/useAuth";
 export function Login() {
   const { login, loading } = useAuth();
 
+  const handleTestMode = () => {
+    // Temporary test mode to bypass authentication
+    localStorage.setItem('testMode', 'true');
+    window.location.reload();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -29,6 +35,15 @@ export function Login() {
           >
             <Chrome className="h-5 w-5 mr-2" />
             {loading ? "Signing in..." : "Sign in with Google"}
+          </Button>
+          
+          <Button
+            onClick={handleTestMode}
+            variant="outline"
+            className="w-full min-h-[44px] text-lg border-blue-600 text-blue-600 hover:bg-blue-50"
+          >
+            <Dumbbell className="h-5 w-5 mr-2" />
+            Try Demo Mode
           </Button>
           
           <div className="text-center text-sm text-gray-500">

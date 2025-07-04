@@ -53,6 +53,9 @@ export function Login() {
             <p className="mt-2">
               Your workout data is automatically synced across all your devices
             </p>
+            <p className="mt-2 text-xs text-gray-400">
+              After signing in with Google, you may need to refresh the page once
+            </p>
           </div>
         </CardContent>
       </Card>

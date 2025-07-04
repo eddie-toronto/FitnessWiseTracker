@@ -73,7 +73,13 @@ export function useAuth() {
     });
 
     // Handle redirect on app initialization
-    handleAuthRedirect().catch(console.error);
+    handleAuthRedirect().then((user) => {
+      if (user) {
+        console.log("Redirect auth successful, user:", user);
+      }
+    }).catch((error) => {
+      console.error("Redirect handling failed:", error);
+    });
 
     return () => unsubscribe();
   }, []);

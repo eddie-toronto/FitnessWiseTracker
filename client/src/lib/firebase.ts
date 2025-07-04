@@ -30,12 +30,14 @@ export async function handleAuthRedirect() {
   try {
     const result = await getRedirectResult(auth);
     if (result?.user) {
+      console.log("User signed in via redirect:", result.user);
       return result.user;
     }
     return null;
   } catch (error) {
     console.error("Error handling auth redirect:", error);
-    throw error;
+    // Don't throw redirect errors, just return null
+    return null;
   }
 }
 

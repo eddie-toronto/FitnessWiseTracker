@@ -96,11 +96,12 @@ export function DayBanner({
         {!effectiveMinimized && (
           <>
             {/* Timer Controls */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+            <div className="flex flex-row items-center justify-center gap-3 mb-4 flex-wrap">
               <Button
                 onClick={onStartTimer}
                 disabled={timerState.running}
-                className="bg-green-600 hover:bg-green-700 text-white min-h-[44px] shadow-lg"
+                size="sm"
+                className="bg-green-600 hover:bg-green-700 text-white min-h-[40px] px-4 shadow-lg"
               >
                 <Play className="h-4 w-4 mr-2" />
                 Start
@@ -109,7 +110,8 @@ export function DayBanner({
               <Button
                 onClick={onPauseTimer}
                 disabled={!timerState.running}
-                className="bg-yellow-600 hover:bg-yellow-700 text-white min-h-[44px] shadow-lg"
+                size="sm"
+                className="bg-yellow-600 hover:bg-yellow-700 text-white min-h-[40px] px-4 shadow-lg"
               >
                 <Pause className="h-4 w-4 mr-2" />
                 Pause
@@ -117,7 +119,8 @@ export function DayBanner({
               
               <Button
                 onClick={onCompleteWorkout}
-                className="bg-red-600 hover:bg-red-700 text-white min-h-[44px] shadow-lg"
+                size="sm"
+                className="bg-red-600 hover:bg-red-700 text-white min-h-[40px] px-4 shadow-lg"
               >
                 <Square className="h-4 w-4 mr-2" />
                 Complete

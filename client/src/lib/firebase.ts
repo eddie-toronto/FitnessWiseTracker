@@ -2,11 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut, onAuthStateChanged, User } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "demo-key",
-  authDomain: `${import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project"}.firebaseapp.com`,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project",
-  storageBucket: `${import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project"}.firebasestorage.app`,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "demo-app-id",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyAXfJ4m7zibgmkXFwu4shzveTzzmHUQu-4",
+  authDomain: "fitnesswise-replit.firebaseapp.com",
+  projectId: "fitnesswise-replit",
+  storageBucket: "fitnesswise-replit.firebasestorage.app",
+  messagingSenderId: "926918272017",
+  appId: "1:926918272017:web:275ba28bf9ef1122a6fdb0",
+  measurementId: "G-YD17RC9R3K"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(142, 76%, 36%);
+  --secondary-foreground: hsl(142, 76%, 96%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(43, 96%, 6%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Custom fitness app colors */
+  --fitness-blue: hsl(207, 90%, 54%);
+  --fitness-blue-dark: hsl(207, 90%, 48%);
+  --fitness-green: hsl(142, 76%, 36%);
+  --fitness-green-dark: hsl(142, 76%, 30%);
+  --fitness-orange: hsl(43, 96%, 56%);
+  --fitness-orange-dark: hsl(43, 96%, 50%);
+  --fitness-red: hsl(0, 84.2%, 60.2%);
+  --fitness-red-dark: hsl(0, 84.2%, 54%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .gradient-blue {
+    background: linear-gradient(135deg, hsl(207, 90%, 54%) 0%, hsl(207, 90%, 48%) 100%);
+  }
+  
+  .gradient-green {
+    background: linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(142, 76%, 30%) 100%);
+  }
+  
+  .gradient-orange {
+    background: linear-gradient(135deg, hsl(43, 96%, 56%) 0%, hsl(43, 96%, 50%) 100%);
+  }
+  
+  .gradient-red {
+    background: linear-gradient(135deg, hsl(0, 84.2%, 60.2%) 0%, hsl(0, 84.2%, 54%) 100%);
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(60, 4.8%, 95.9%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(207, 90%, 54%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(207, 90%, 48%);
+}
+
+/* Animation for progress bars */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.progress-bar {
+  animation: progressFill 0.5s ease-out forwards;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .day-banner {
+    position: sticky;
+    top: 80px;
+  }
+  
+  .workout-banner {
+    padding-bottom: 2rem;
+  }
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

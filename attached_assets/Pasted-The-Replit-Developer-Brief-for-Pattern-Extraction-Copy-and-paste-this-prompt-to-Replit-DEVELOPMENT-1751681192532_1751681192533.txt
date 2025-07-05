@@ -1,0 +1,64 @@
+The Replit Developer Brief for Pattern Extraction
+Copy and paste this prompt to Replit:
+
+DEVELOPMENT TASK: Pattern Extraction Analysis
+I need you to analyze the existing FitnessWise codebase and create a comprehensive Pattern Extraction Document that identifies valuable design patterns for rebuilding the application using vanilla JavaScript instead of React.
+SPECIFIC DELIVERABLES:
+
+Component Analysis Report
+
+Examine each React component (App.js, TimerButtons.js, WorkoutDisplay.js, etc.)
+For each component, identify:
+
+What architectural concept it represents
+What user experience pattern it implements
+How the concept could translate to vanilla JavaScript
+What functionality is missing vs. what's actually implemented
+
+
+
+
+Technology Stack Comparison Matrix
+
+Create a table comparing React implementation vs. vanilla JavaScript requirements
+Identify which patterns from React components can be preserved
+Highlight which implementations need complete rebuilding
+Note performance and complexity trade-offs
+
+
+User Interface Pattern Catalog
+
+Document the three-banner system architecture (App Banner, Day Banner, Workout Banner)
+Analyze the progressive disclosure concepts vs. actual implementation
+Extract mobile-first design patterns that work
+Identify touch interaction patterns that need improvement
+
+
+State Management Architecture Review
+
+Document how React currently handles state vs. requirements for 30-second auto-save
+Analyze Firebase integration patterns vs. actual working implementation
+Identify data persistence patterns that can be preserved
+Highlight gaps between claimed functionality and actual code
+
+
+Migration Strategy Recommendations
+
+For each major component, provide specific recommendations for vanilla JavaScript conversion
+Identify which files/patterns should be preserved vs. rebuilt
+Create priority order for rebuilding components
+Suggest specific ES6 module patterns to replace React components
+
+
+
+OUTPUT FORMAT:
+Create a comprehensive markdown document with clear sections for each analysis area. Include code examples where relevant. Focus on practical migration guidance rather than theoretical analysis.
+CRITICAL REQUIREMENTS:
+
+Be brutally honest about implementation gaps vs. claims
+Focus on patterns that serve the actual user requirements (workout tracking during physical exertion)
+Prioritize reliability and mobile performance over feature complexity
+Provide specific technical recommendations, not general observations
+
+CONTEXT:
+This analysis will guide a complete application rebuild using vanilla JavaScript, ES6 modules, and modern web standards. The goal is preserving good architectural thinking while fixing fundamental implementation problems.

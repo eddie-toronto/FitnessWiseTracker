@@ -27,16 +27,39 @@ export function DayBanner({
   const [scrollMinimized, setScrollMinimized] = useState(false);
   const { formatTime } = useTimer();
 
-  // Amazon-style scroll minimization behavior
+  // Amazon-style scroll minimization behavior with smooth transitions
   useEffect(() => {
+    let ticking = false;
+    let lastScrollY = 0;
+    let timeoutId: NodeJS.Timeout;
+    
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const shouldMinimize = scrollY > 100; // Minimize after scrolling 100px
-      setScrollMinimized(shouldMinimize);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const scrollThreshold = 80;
+          
+          // Clear previous timeout
+          clearTimeout(timeoutId);
+          
+          // Add small delay to prevent rapid state changes
+          timeoutId = setTimeout(() => {
+            const shouldMinimize = scrollY > scrollThreshold;
+            setScrollMinimized(shouldMinimize);
+          }, 50);
+          
+          lastScrollY = scrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Combined minimized state (manual or scroll-based)
@@ -61,7 +84,7 @@ export function DayBanner({
       <div className="max-w-7xl mx-auto">
         {/* Full state header */}
         {!effectiveMinimized && (
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 transition-opacity duration-300">
             <div>
               <h2 className="text-2xl font-bold text-gray-800">{dayTitles[workoutDay]}</h2>
               <p className="text-gray-600">{dayDescriptions[workoutDay]}</p>
@@ -96,7 +119,7 @@ export function DayBanner({
         {!effectiveMinimized && (
           <>
             {/* Timer Controls */}
-            <div className="flex flex-row items-center justify-center gap-3 mb-4 flex-wrap">
+            <div className="flex flex-row items-center justify-center gap-3 mb-4 flex-wrap transition-opacity duration-300">
               <Button
                 onClick={onStartTimer}
                 disabled={timerState.running}
@@ -141,7 +164,7 @@ export function DayBanner({
 
         {/* Minimized state - timer only (Amazon-style) */}
         {effectiveMinimized && (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between transition-opacity duration-300">
             <div className="flex items-center space-x-3">
               <div className="text-xl font-bold text-gray-800">
                 {formatTime(timerState.elapsed)}

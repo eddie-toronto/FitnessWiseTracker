@@ -16,9 +16,16 @@ export function useWorkout() {
       try {
         const response = await fetch(`/api/sessions/user/${appUser.id}`);
         if (response.ok) {
-          const session = await response.json();
-          if (session?.sessionData) {
-            setCurrentSession(session.sessionData);
+          const text = await response.text();
+          if (text) {
+            try {
+              const session = JSON.parse(text);
+              if (session?.sessionData) {
+                setCurrentSession(session.sessionData);
+              }
+            } catch (parseError) {
+              console.error("JSON parse error:", parseError);
+            }
           }
         }
       } catch (error) {
@@ -170,8 +177,8 @@ export function useWorkout() {
 
       // Update user stats
       await apiRequest("PATCH", `/api/users/${appUser.id}`, {
-        totalWorkouts: appUser.totalWorkouts + 1,
-        currentStreak: appUser.currentStreak + 1,
+        totalWorkouts: (appUser.totalWorkouts || 0) + 1,
+        currentStreak: (appUser.currentStreak || 0) + 1,
       });
 
       // Clear session

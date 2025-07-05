@@ -37,6 +37,12 @@ export function Workout({ workoutDay }: WorkoutProps) {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">No Active Workout</h2>
           <p className="text-gray-600">Start a workout from the dashboard to begin tracking.</p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Go to Dashboard
+          </button>
         </div>
       </div>
     );

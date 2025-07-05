@@ -26,8 +26,12 @@ function Router() {
   useEffect(() => {
     if (currentSession?.currentWorkout) {
       setCurrentWorkoutDay(currentSession.currentWorkout);
+      // Auto-navigate to workout page if we have an active session
+      if (location === '/' && currentSession.currentWorkout) {
+        setLocation('/workout');
+      }
     }
-  }, [currentSession]);
+  }, [currentSession, location, setLocation]);
 
   const handleStartWorkout = (day: 'A' | 'B' | 'C') => {
     startWorkout(day);

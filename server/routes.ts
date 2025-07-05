@@ -3,6 +3,8 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertWorkoutSchema, insertExerciseSchema, insertWorkoutSessionSchema } from "@shared/schema";
 import { z } from "zod";
+import express from "express";
+import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // User routes
@@ -132,6 +134,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+  });
+
+  // Serve vanilla JavaScript build at /vanilla route
+  app.use('/vanilla', express.static(path.join(process.cwd(), 'vanilla-js')));
+  
+  // Redirect /vanilla to serve index.html
+  app.get('/vanilla', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'vanilla-js', 'index.html'));
   });
 
   const httpServer = createServer(app);

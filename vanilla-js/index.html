@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitnessWise - Workout Tracker</title>
+  <link rel="stylesheet" href="styles/app.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="FitnessWise">
+</head>
+<body>
+  <div id="app">
+    <div id="app-banner" data-component="app-banner"></div>
+    <div id="day-banner" data-component="day-banner"></div>
+    <div id="workout-banner" data-component="workout-banner"></div>
+    <div id="save-indicator" data-component="save-indicator"></div>
+  </div>
+  <script type="module" src="app.js"></script>
+  <script>
+    // Register service worker for PWA functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('✅ SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('❌ SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

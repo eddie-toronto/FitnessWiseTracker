@@ -1,0 +1,828 @@
+/* FitnessWise Vanilla JS - Mobile-First Styles */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background: #f9fafb;
+  overflow-x: hidden;
+}
+
+/* App Layout */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Touch Target Standards - 44px minimum */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* App Banner - Fixed Header */
+#app-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-icon {
+  font-size: 1.5rem;
+}
+
+.app-title h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.streak-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.flame-icon {
+  color: #fbbf24;
+}
+
+.auth-button, .menu-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover, .menu-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.menu-button {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+/* Day Banner - Progressive Disclosure */
+#day-banner {
+  position: sticky;
+  top: 80px;
+  z-index: 30;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.day-banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.day-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.day-banner-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.day-banner-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.minimize-button {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Timer Display */
+.timer-display {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.timer-time {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-feature-settings: 'tnum';
+}
+
+.timer-status {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Timer Controls - Horizontal Layout */
+.timer-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.timer-button {
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timer-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.timer-button:active {
+  transform: translateY(0);
+}
+
+.timer-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.start-button {
+  background: #059669;
+}
+
+.start-button:hover:not(:disabled) {
+  background: #047857;
+}
+
+.pause-button {
+  background: #d97706;
+}
+
+.pause-button:hover:not(:disabled) {
+  background: #b45309;
+}
+
+.complete-button {
+  background: #dc2626;
+}
+
+.complete-button:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+/* Minimized State */
+.day-banner.minimized {
+  padding: 0.5rem 1rem;
+}
+
+.day-banner.minimized .day-banner-header {
+  margin-bottom: 0;
+}
+
+.day-banner.minimized .timer-display,
+.day-banner.minimized .timer-controls {
+  display: none;
+}
+
+.minimized-timer {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-banner.minimized .minimized-timer {
+  display: flex;
+}
+
+.minimized-timer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.minimized-timer-time {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.timer-indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+.timer-indicator.running {
+  background: #059669;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.minimized-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.minimized-controls .timer-button {
+  padding: 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Workout Banner */
+#workout-banner {
+  flex: 1;
+  padding: 1rem;
+  margin-top: 80px;
+}
+
+.workout-banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.exercise-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.exercise-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.video-button {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.exercise-description {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+/* Set Tracking */
+.sets-container {
+  margin-bottom: 1.5rem;
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.set-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.set-number {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.set-target {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.set-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rep-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rep-button.decrement {
+  background: #d1d5db;
+  color: #4b5563;
+}
+
+.rep-button.increment {
+  background: #2563eb;
+  color: white;
+}
+
+.rep-button:hover {
+  transform: scale(1.05);
+}
+
+.rep-button:active {
+  transform: scale(0.95);
+}
+
+.rep-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  min-width: 3rem;
+  text-align: center;
+}
+
+.complete-set-button {
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.complete-set-button:hover {
+  background: #047857;
+}
+
+.complete-set-button.completed {
+  background: #10b981;
+}
+
+/* Exercise Navigation */
+.exercise-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.nav-button {
+  background: #4b5563;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: #374151;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-button.next {
+  background: #2563eb;
+}
+
+.nav-button.next:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+/* Save Indicator */
+#save-indicator {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 40;
+  background: #1f2937;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+#save-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#save-indicator.saving {
+  background: #d97706;
+}
+
+#save-indicator.saved {
+  background: #059669;
+}
+
+#save-indicator.error {
+  background: #dc2626;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .timer-time {
+    font-size: 2.5rem;
+  }
+  
+  .timer-controls {
+    gap: 0.5rem;
+  }
+  
+  .timer-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .exercise-card {
+    padding: 1rem;
+  }
+  
+  .set-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .set-controls {
+    justify-content: center;
+  }
+}
+
+/* Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .timer-button {
+    padding: 1rem 1.5rem;
+  }
+  
+  .rep-button {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111827;
+    color: #f9fafb;
+  }
+  
+  .exercise-card {
+    background: #1f2937;
+  }
+  
+  .set-row {
+    background: #374151;
+  }
+  
+  .day-banner-title {
+    color: #f9fafb;
+  }
+}
+
+/* Workout Selection */
+.no-workout-message {
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.no-workout-message h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.no-workout-message p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.workout-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.workout-option-button {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.workout-option-button:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.workout-option-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.workout-option-subtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Exercise Meta Information */
+.exercise-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.equipment::before {
+  content: "🏋️ ";
+  margin-right: 0.25rem;
+}
+
+.muscle-groups::before {
+  content: "🎯 ";
+  margin-right: 0.25rem;
+}
+
+/* Exercise List Improvements */
+.exercise-list-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-list-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.exercise-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.exercise-list-item:hover {
+  background: #f3f4f6;
+}
+
+.exercise-list-item.current {
+  background: #dbeafe;
+  border-left: 4px solid #2563eb;
+}
+
+.exercise-list-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exercise-list-number {
+  width: 2rem;
+  height: 2rem;
+  background: #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.exercise-list-item.current .exercise-list-number {
+  background: #2563eb;
+  color: white;
+}
+
+.exercise-list-name {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.exercise-list-sets {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.exercise-completed {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.exercise-progress-indicator {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Touch Active States */
+.touch-target.active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.timer-button.active {
+  transform: scale(0.95) translateY(0);
+}
+
+.rep-button.active {
+  transform: scale(0.85);
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin: -0.5rem 0 0 -0.5rem;
+  border: 2px solid #d1d5db;
+  border-top: 2px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* App Messages */
+.app-message {
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Improved Focus States for Accessibility */
+.touch-target:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Better Visual Hierarchy */
+.exercise-progress {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Improved Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better Performance */
+.timer-indicator,
+.rep-button,
+.touch-target {
+  will-change: transform;
+}
+
+/* Print Styles */
+@media print {
+  #app-banner,
+  #save-indicator,
+  .timer-controls,
+  .minimized-controls {
+    display: none !important;
+  }
+}

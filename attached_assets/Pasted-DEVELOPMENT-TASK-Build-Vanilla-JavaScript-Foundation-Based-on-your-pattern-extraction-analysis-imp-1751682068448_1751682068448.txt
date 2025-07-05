@@ -1,0 +1,80 @@
+DEVELOPMENT TASK: Build Vanilla JavaScript Foundation
+Based on your pattern extraction analysis, implement Phase 1 of the FitnessWise rebuild using vanilla JavaScript.
+CRITICAL REQUIREMENTS:
+
+Zero data loss during workout sessions
+Sub-100ms response to touch interactions
+Reliable 30-second auto-save with retry logic
+Works flawlessly during physical exertion
+
+SPECIFIC IMPLEMENTATION TASKS:
+
+Create Basic HTML Structure
+html<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitnessWise - Workout Tracker</title>
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div id="app">
+    <div id="app-banner" data-component="app-banner"></div>
+    <div id="day-banner" data-component="day-banner"></div>
+    <div id="workout-banner" data-component="workout-banner"></div>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+
+Implement WorkoutStateManager (from your analysis)
+
+Use the exact retry logic and save queue pattern you designed
+Include localStorage backup for immediate reliability
+Implement the singleton pattern to prevent multiple instances
+
+
+Build Three-Banner Components
+
+AppBanner: Fixed header with authentication status
+DayBanner: Progressive disclosure with optimized scroll handling
+WorkoutBanner: Touch-optimized exercise tracking
+
+
+Create Event Delegation System
+
+Single click handler with action mapping
+Proper preventDefault for touch events
+44px minimum touch targets for all interactive elements
+
+
+Implement Timer System
+
+Use Web Workers for accuracy (as you recommended)
+Persistent state across phone calls and app switching
+Horizontal button layout that works during workouts
+
+
+
+FILE STRUCTURE TO CREATE:
+Use the exact structure from your analysis:
+fitnesswise-vanilla/
+├── public/
+│   ├── index.html
+│   ├── styles/app.css
+├── src/
+│   ├── components/AppBanner.js
+│   ├── components/DayBanner.js  
+│   ├── components/WorkoutBanner.js
+│   ├── services/WorkoutStateManager.js
+│   ├── services/TimerService.js
+├── app.js
+TESTING REQUIREMENTS:
+
+Test touch interactions on mobile devices
+Verify auto-save works during network interruptions
+Ensure timer state survives phone calls
+Validate workout progress persists across browser refresh
+
+OUTPUT: Complete working foundation that I can test immediately on my phone during a real workout session.
